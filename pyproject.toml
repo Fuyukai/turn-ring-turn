@@ -1,0 +1,75 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "turn-ring-turn"
+version = "0.7.0"
+description = ""
+authors = ["Lura Skye <fuyukaii@proton.me>"]
+readme = "README.rst"
+packages = [{include = "trt", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.12"
+anyio = ">=4.6.0"
+century-ring = {git = "https://github.com/Fuyukai/century-ring.git"}
+attrs = ">=24.2.0"
+
+[tool.poetry.group.dev.dependencies]
+ruff = ">=0.6.9"
+pyright = ">=1.1.383"
+pytest = ">=8.3.3"
+pytest-cov = ">=5.0.0"
+trio = ">=0.26.2"
+
+[tool.pyright]
+pythonVersion = "3.12"
+include = ["src"]
+typeCheckingMode = "strict"
+
+reportImplicitOverride = "warning"
+reportUnusedVariable = false
+reportIncompatibleVariableOverride = false
+reportPrivateUsage = false
+
+[tool.ruff]
+target-version = "py312"
+respect-gitignore = true
+# fix = true
+src = ["src/"]
+line-length = 100
+output-format = "full"
+
+[tool.ruff.lint]
+select = [
+    "RUF",
+    "F",
+    "E",
+    "W",
+    "I",
+    "UP",
+    "B",
+    "Q",
+    "YTT",
+    "PYI",
+    "SIM",
+    "RET",
+    "PERF",
+    "PIE",
+    "SIM",
+    "C4",
+
+    # specific docstring rules
+    "D201", "D204", "D211", "D419",   # less ugly docstrings
+]
+ignore = [
+    "W291",
+    "W293",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/test_*" = ["D"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
